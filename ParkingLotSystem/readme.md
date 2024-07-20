@@ -70,20 +70,84 @@ This design ensures efficient management of a multi-level parking lot with real-
 
 
 ### Class Diagram
-+----------------+       +----------------+       +----------------+       +----------------+       +----------------+
-|  ParkingLot    |       |  Level         |       |  ParkingSlot   |       |  Vehicle       |       |  VehicleType   |
-+----------------+       +----------------+       +----------------+       +----------------+       +----------------+
-| - id           |1     n| - id           |1     n| - id           |       | - licensePlate |       | + COMPACT      |
-| - levels       |-------| - parkingSlots |-------| - size         |       | - type         |       | + LARGE        |
-| - totalSlots   |       | - levelNumber  |       | - isOccupied   |       | - ownerName    |       | + ELECTRIC     |
-| - availableSlots|       | - totalSlots  |       | - currentVehicle|       +----------------+       +----------------+
-+----------------+       | - availableSlots|       +----------------+
-| + parkVehicle()|       +----------------+       | + assignVehicle()|
-| + unparkVehicle()|      | + getAvailableSlot()|   | + removeVehicle() |
-| + getAvailableSlot()|   | + updateAvailability()| | + isAvailable()   |
-| + updateAvailability()| +----------------+       +----------------+
-+----------------+       
+# Parking Lot System Design
 
+## Class Diagram
+
+### ParkingLot
+| Attribute         | Type              |
+|-------------------|-------------------|
+| `id`              | String            |
+| `levels`          | List<Level>       |
+| `totalSlots`      | int               |
+| `availableSlots`  | int               |
+
+| Method                   | Description                        |
+|--------------------------|------------------------------------|
+| `parkVehicle(vehicle)`   | Parks a vehicle                    |
+| `unparkVehicle(vehicle)` | Unparks a vehicle                  |
+| `getAvailableSlot(type)` | Gets an available slot for a type  |
+| `updateAvailability()`   | Updates slot availability          |
+
+### Level
+| Attribute         | Type              |
+|-------------------|-------------------|
+| `id`              | String            |
+| `parkingSlots`    | List<ParkingSlot> |
+| `levelNumber`     | int               |
+| `totalSlots`      | int               |
+| `availableSlots`  | int               |
+
+| Method                   | Description                        |
+|--------------------------|------------------------------------|
+| `getAvailableSlot(type)` | Gets an available slot for a type  |
+| `updateAvailability()`   | Updates slot availability          |
+
+### ParkingSlot
+| Attribute         | Type              |
+|-------------------|-------------------|
+| `id`              | String            |
+| `size`            | SlotSize          |
+| `isOccupied`      | boolean           |
+| `currentVehicle`  | Vehicle           |
+
+| Method                   | Description                        |
+|--------------------------|------------------------------------|
+| `assignVehicle(vehicle)` | Assigns a vehicle to the slot      |
+| `removeVehicle()`        | Removes a vehicle from the slot    |
+| `isAvailable()`          | Checks if the slot is available    |
+
+### Vehicle
+| Attribute         | Type              |
+|-------------------|-------------------|
+| `licensePlate`    | String            |
+| `type`            | VehicleType       |
+| `ownerName`       | String            |
+
+| Method                   | Description                        |
+|--------------------------|------------------------------------|
+| `getType()`              | Gets the type of the vehicle       |
+
+### VehicleType
+| Enum Value               |
+|--------------------------|
+| `COMPACT`                |
+| `LARGE`                  |
+| `ELECTRIC`               |
+
+### SlotSize
+| Enum Value               |
+|--------------------------|
+| `SMALL`                  |
+| `MEDIUM`                 |
+| `LARGE`                  |
+
+## Relationships
+
+- A `ParkingLot` has a one-to-many relationship with `Level`.
+- A `Level` has a one-to-many relationship with `ParkingSlot`.
+- A `ParkingSlot` is assigned to one `Vehicle`.
+- `VehicleType` and `SlotSize` are enums used in `Vehicle` and `ParkingSlot` respectively.
 
 ### Sequence Diagram for Parking a Vehicle
 Driver -> ParkingLot: parkVehicle(Vehicle vehicle)
