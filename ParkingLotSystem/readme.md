@@ -70,11 +70,7 @@ This design ensures efficient management of a multi-level parking lot with real-
 
 
 ### Class Diagram
-# Parking Lot System Design
-
-## Class Diagram
-
-### ParkingLot
+## ParkingLot
 | Attribute         | Type              |
 |-------------------|-------------------|
 | `id`              | String            |
@@ -89,7 +85,7 @@ This design ensures efficient management of a multi-level parking lot with real-
 | `getAvailableSlot(type)` | Gets an available slot for a type  |
 | `updateAvailability()`   | Updates slot availability          |
 
-### Level
+## Level
 | Attribute         | Type              |
 |-------------------|-------------------|
 | `id`              | String            |
@@ -103,7 +99,7 @@ This design ensures efficient management of a multi-level parking lot with real-
 | `getAvailableSlot(type)` | Gets an available slot for a type  |
 | `updateAvailability()`   | Updates slot availability          |
 
-### ParkingSlot
+## ParkingSlot
 | Attribute         | Type              |
 |-------------------|-------------------|
 | `id`              | String            |
@@ -117,7 +113,7 @@ This design ensures efficient management of a multi-level parking lot with real-
 | `removeVehicle()`        | Removes a vehicle from the slot    |
 | `isAvailable()`          | Checks if the slot is available    |
 
-### Vehicle
+## Vehicle
 | Attribute         | Type              |
 |-------------------|-------------------|
 | `licensePlate`    | String            |
@@ -128,14 +124,14 @@ This design ensures efficient management of a multi-level parking lot with real-
 |--------------------------|------------------------------------|
 | `getType()`              | Gets the type of the vehicle       |
 
-### VehicleType
+## VehicleType
 | Enum Value               |
 |--------------------------|
 | `COMPACT`                |
 | `LARGE`                  |
 | `ELECTRIC`               |
 
-### SlotSize
+## SlotSize
 | Enum Value               |
 |--------------------------|
 | `SMALL`                  |
@@ -143,7 +139,6 @@ This design ensures efficient management of a multi-level parking lot with real-
 | `LARGE`                  |
 
 ## Relationships
-
 - A `ParkingLot` has a one-to-many relationship with `Level`.
 - A `Level` has a one-to-many relationship with `ParkingSlot`.
 - A `ParkingSlot` is assigned to one `Vehicle`.
