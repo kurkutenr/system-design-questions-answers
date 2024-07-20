@@ -70,6 +70,7 @@ This design ensures efficient management of a multi-level parking lot with real-
 
 
 ### Class Diagram
+
 ## ParkingLot
 | Attribute         | Type              |
 |-------------------|-------------------|
