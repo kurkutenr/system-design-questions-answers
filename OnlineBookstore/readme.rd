@@ -1,6 +1,6 @@
 
 # Online Bookstore System Design
-:books: :department_store: :notebook: :book: 
+:books: :notebook: :book: 
 
 ## Question
 - **Entities and Relationships**: What classes and methods would you have to deal with for books, patrons, and orders? How would you interrelate these entities?
@@ -130,7 +130,6 @@ The diagrams and detailed class definitions ensure clarity and structure for the
 
 ## Class Diagram
 
-```plaintext
 +----------------+       +----------------+       +----------------+       +----------------+       +----------------+
 |     Book       |       |    Patron      |       |     Order      |       |   OrderItem    |       |    Inventory   |
 +----------------+       +----------------+       +----------------+       +----------------+       +----------------+
@@ -151,11 +150,9 @@ The diagrams and detailed class definitions ensure clarity and structure for the
 | - isSuccessful |       | - zipCode      |
 +----------------+       | - country      |
                          +----------------+
-```
+
 
 ## Sequence Diagram for Placing an Order
-
-```plaintext
 Patron -> Inventory: searchBook(String query)
 Inventory -> Patron: return list of books
 Patron -> Order: create order with selected books
@@ -163,15 +160,13 @@ Order -> Payment: processPayment()
 Payment -> Order: update order status to "Paid"
 Order -> Inventory: update stock levels
 Order -> Patron: notify order confirmation
-```
+
 
 ## Sequence Diagram for Processing an Order
 
-```plaintext
 Patron -> Order: view order status
 Order -> Inventory: check stock
 Inventory -> Order: confirm stock availability
 Order -> Payment: process payment
 Payment -> Order: update status to "Paid"
 Order -> Patron: notify order status
-```
